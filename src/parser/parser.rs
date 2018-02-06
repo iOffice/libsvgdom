@@ -130,8 +130,7 @@ pub fn parse_svg(text: &str, opt: &ParseOptions) -> Result<Document> {
         return Err(ErrorKind::EmptyDocument.into());
     }
 
-    // first element must be an 'svg'
-    match doc.children().svg().nth(0) {
+    match doc.children().nth(1).and_then(|n: Node| n.children().svg().nth(0)) {
         Some((id, _)) => {
             if id != ElementId::Svg {
                 return Err(ErrorKind::NoSvgElement.into());
@@ -302,7 +301,7 @@ fn process_token<'a>(
     // which is faster
     if parent.node_type() == NodeType::Root {
         // check that the first element of the doc is 'svg'
-        if let Some((id, _)) = doc.children().svg().nth(0) {
+        if let Some((id, _)) = doc.children().nth(1).and_then(|n: Node| n.children().svg().nth(0)) {
             if id != ElementId::Svg {
                 return Err(ErrorKind::NoSvgElement.into());
             }

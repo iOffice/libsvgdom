@@ -141,7 +141,7 @@ impl Document {
     ///
     /// [`Node`]: struct.Node.html
     pub fn svg_element(&self) -> Option<Node> {
-        for (id, n) in self.root.children().svg() {
+        for (id, n) in self.root.children().nth(1).and_then(|n| n.children().svg().nth(0)) {
             if id == ElementId::Svg {
                 return Some(n.clone());
             }

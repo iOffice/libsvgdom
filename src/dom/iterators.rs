@@ -144,6 +144,7 @@ filter_svg!(Descendants);
 /// An iterator of [`Node`]s to the children of a given node.
 ///
 /// [`Node`]: struct.Node.html
+#[derive(Debug)]
 pub struct Children(Option<Node>);
 
 impl Children {

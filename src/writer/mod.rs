@@ -144,7 +144,7 @@ fn write_start_edge(
         NodeType::Comment => {
             depth.write_indent(out);
             write_non_element_node(node, out);
-            write_newline(opt.indent, out);
+            write_newline(Indent::Spaces(0), out);
         }
         NodeType::Text => {
             write_non_element_node(node, out);
